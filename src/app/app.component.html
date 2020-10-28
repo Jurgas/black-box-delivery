@@ -2,8 +2,9 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" [routerLink]="['/']">
-        <span><img src="assets/favicon.png" class="logo" alt=""></span>
+        <span><img src="assets/favicon.png" class="logo" alt="Logo"></span>
         Black Box Delivery
+        <span id="creator">by Sebastian Jurga</span>
       </a>
     </div>
     <ul class="nav navbar-nav">
@@ -17,4 +18,13 @@
 <section class="page-content">
   <router-outlet></router-outlet>
 </section>
-<footer> Hello</footer>
+<footer class="nav-footer">
+  <div class="footer-content">
+    <div id="div_list">
+      <ul id="ul_list">
+        <li>BlackBox, Inc. {{date}}</li>
+        <li><a href="https://github.com/Jurgas/black-box-delivery">GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
