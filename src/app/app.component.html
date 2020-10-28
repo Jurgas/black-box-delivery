@@ -4,12 +4,17 @@
       <a class="navbar-brand" [routerLink]="['/']">
         <span><img src="assets/favicon.png" class="logo" alt=""></span>
         Black Box Delivery
-        </a>
+      </a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a [routerLink]="['/']">Home</a></li>
-      <li><a [routerLink]="['sender/sign-up']">Sign-up</a></li>
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <a [routerLink]="['/']">Home</a></li>
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <a [routerLink]="['/sender/sign-up']">Sign-up</a></li>
     </ul>
   </div>
 </nav>
-<router-outlet></router-outlet>
+<section class="page-content">
+  <router-outlet></router-outlet>
+</section>
+<footer> Hello</footer>
