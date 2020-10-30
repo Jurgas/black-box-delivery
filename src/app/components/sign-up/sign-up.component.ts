@@ -11,8 +11,6 @@ import {setSeconds} from 'ngx-bootstrap/chronos/utils/date-setters';
 })
 export class SignUpComponent implements OnInit {
 
-  odp: string;
-
   sexes: Sex[] = [
     {value: 'M', viewValue: 'Male'},
     {value: 'F', viewValue: 'Female'}
@@ -32,6 +30,8 @@ export class SignUpComponent implements OnInit {
   photo: File;
   photoLabel = 'Choose File';
   loginAvailable = false;
+  response = '';
+
 
   constructor(private api: RegisterService) {
   }
@@ -40,7 +40,6 @@ export class SignUpComponent implements OnInit {
     this.registerFormGroup.controls.login.valueChanges.subscribe(value => {
       if (this.registerFormGroup.controls.login.valid) {
         this.api.checkUsername(value).subscribe(response => {
-          console.log(response[value]);
           if (response[value] === 'available') {
             this.loginAvailable = true;
           } else {
@@ -86,18 +85,30 @@ export class SignUpComponent implements OnInit {
       formData.append('photo', this.photo, this.photo.name);
       formData.append('login', this.registerFormGroup.controls.login.value);
       this.api.registerUser(formData).subscribe(() => {
-        console.log('gut');
       }, error => {
         if (error.status === 200) {
-          this.odp = 'User has been registered';
+          this.response = 'User ' + this.registerFormGroup.controls.login.value + ' has been registered';
+          this.resetFormGroup();
         } else if (error.status === 400) {
-          this.odp = 'There is already a user called ' + this.registerFormGroup.controls.login.value;
+          this.response = 'There is already a user called ' + this.registerFormGroup.controls.login.value;
         } else {
-          this.odp = 'Error';
+          this.response = 'An error occurred. Try again later';
         }
       });
     }
 
+  }
+
+  resetFormGroup(): void {
+    this.registerFormGroup.reset();
+    this.photo = null;
+    this.photoLabel = 'Choose File';
+    this.registerFormGroup.controls.firstname.setErrors(null);
+    this.registerFormGroup.controls.lastname.setErrors(null);
+    this.registerFormGroup.controls.password.setErrors(null);
+    this.registerFormGroup.controls.passwordConfirm.setErrors(null);
+    this.registerFormGroup.controls.sex.setErrors(null);
+    this.registerFormGroup.controls.login.setErrors(null);
   }
 
 }

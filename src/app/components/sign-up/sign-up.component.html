@@ -100,7 +100,7 @@
   <div class="button-register">
     <button mat-raised-button color="primary" (click)="onRegister()">Register</button>
   </div>
-  <div>
-    To jest odpowiedz: {{odp}}
+  <div *ngIf="response !== ''" class="response">
+    {{response}}
   </div>
 </form>
