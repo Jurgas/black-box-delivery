@@ -23,7 +23,7 @@
       <mat-error *ngIf="labelFormGroup.get('size').hasError('required')">Required</mat-error>
     </mat-form-field>
     <div class="form-button">
-      <button type="submit" mat-mini-fab color="primary">
+      <button type="submit" mat-mini-fab color="primary" [disabled]="labelFormGroup.invalid">
         <mat-icon>add</mat-icon>
       </button>
     </div>
