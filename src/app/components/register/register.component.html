@@ -1,0 +1,65 @@
+<header>Create your account</header>
+<form class="register" [formGroup]="registerFormGroup" (ngSubmit)="onRegister()">
+  <mat-form-field hideRequiredMarker>
+    <mat-label>Firstname</mat-label>
+    <input matInput
+           [formControlName]="'firstname'"
+           autocomplete="off">
+    <mat-error *ngIf="registerFormGroup.get('firstname').hasError('required')">Required</mat-error>
+    <mat-error *ngIf="registerFormGroup.get('firstname').hasError('pattern')">Invalid data</mat-error>
+  </mat-form-field>
+  <mat-form-field hideRequiredMarker>
+    <mat-label>Lastname</mat-label>
+    <input matInput
+           [formControlName]="'lastname'"
+           autocomplete="off">
+    <mat-error *ngIf="registerFormGroup.get('lastname').hasError('required')">Required</mat-error>
+    <mat-error *ngIf="registerFormGroup.get('lastname').hasError('pattern')">Invalid data</mat-error>
+  </mat-form-field>
+  <mat-form-field hideRequiredMarker>
+    <mat-label>Email</mat-label>
+    <input matInput
+           [formControlName]="'email'"
+           autocomplete="off">
+    <mat-error *ngIf="registerFormGroup.get('email').hasError('required')">Required</mat-error>
+    <mat-error *ngIf="registerFormGroup.get('email').hasError('pattern')">Invalid data</mat-error>
+  </mat-form-field>
+  <mat-form-field hideRequiredMarker>
+    <mat-label>Username</mat-label>
+    <input matInput
+           [formControlName]="'username'"
+           autocomplete="off">
+    <mat-error *ngIf="registerFormGroup.get('username').hasError('required')">Required</mat-error>
+    <mat-error *ngIf="registerFormGroup.get('username').hasError('pattern')">Only lowercase, 3-12 characters</mat-error>
+    <mat-error *ngIf="registerFormGroup.get('username').hasError('userTaken')">Username taken</mat-error>
+  </mat-form-field>
+  <mat-form-field hideRequiredMarker>
+    <mat-label>Password</mat-label>
+    <input matInput
+           [formControlName]="'password'"
+           autocomplete="off"
+           type="password">
+    <mat-error *ngIf="registerFormGroup.get('password').hasError('required')">Required</mat-error>
+    <mat-error *ngIf="registerFormGroup.get('password').hasError('pattern')">At least 8 characters</mat-error>
+  </mat-form-field>
+  <mat-form-field hideRequiredMarker>
+    <mat-label>Confirm Password</mat-label>
+    <input matInput
+           [formControlName]="'passwordConfirm'"
+           autocomplete="off"
+           type="password">
+    <mat-error *ngIf="registerFormGroup.get('passwordConfirm').hasError('required')">Required</mat-error>
+    <mat-error *ngIf="registerFormGroup.get('passwordConfirm').hasError('pattern')">At least 8 characters</mat-error>
+    <mat-error *ngIf="registerFormGroup.get('passwordConfirm').hasError('confirm')">Passwords didn't match</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+  <mat-label>Address</mat-label>
+  <input matInput
+         [formControlName]="'address'"
+         autocomplete="off">
+  <mat-error *ngIf="registerFormGroup.get('address').hasError('required')">Required</mat-error>
+  </mat-form-field>
+  <div class="button-register">
+    <button mat-raised-button type="submit" color="primary" [disabled]="registerFormGroup.invalid || registerFormGroup.pending">Register</button>
+  </div>
+</form>

@@ -1,24 +1,4 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" [routerLink]="['/']">
-        <div class="logo-component">
-          <div class="logo-brand">
-            <img src="assets/favicon.png" class="logo" alt="Logo">
-            Black Box Delivery
-          </div>
-          <span id="creator">by Sebastian Jurga</span>
-        </div>
-      </a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-        <a [routerLink]="['/']">Home</a></li>
-      <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-        <a [routerLink]="['/sender/sign-up']">Sign-up</a></li>
-    </ul>
-  </div>
-</nav>
+<bbd-header></bbd-header>
 <section class="page-content">
   <router-outlet></router-outlet>
 </section>
@@ -27,7 +7,8 @@
     <div id="div_list">
       <ul id="ul_list">
         <li>BlackBox, Inc. {{date}}</li>
-        <li><a href="https://github.com/Jurgas/black-box-delivery">GitHub</a></li>
+        <li><a href="https://github.com/Jurgas/black-box-delivery">GitHub Frontend</a></li>
+        <li><a href="https://github.com/Jurgas/black-box-delivery-backend">GitHub Backend</a></li>
       </ul>
     </div>
   </div>

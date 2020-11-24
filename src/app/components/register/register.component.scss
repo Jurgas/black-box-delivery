@@ -1,0 +1,34 @@
+header {
+  font-size: 26px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0 0 0;
+  margin-bottom: 30px;
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.mat-form-field {
+  padding: 12px;
+  width: 400px;
+}
+
+.button-login {
+  padding: 12px;
+}
+
+.response{
+  padding: 12px;
+  border: 1px solid black;
+  background: #F8F8F8;
+}

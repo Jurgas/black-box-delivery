@@ -1,0 +1,23 @@
+<header>Login to your account</header>
+<form class="login" [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+  <mat-form-field hideRequiredMarker>
+    <mat-label>Username</mat-label>
+    <input matInput
+           [formControlName]="'username'"
+           autocomplete="off">
+    <mat-error *ngIf="loginFormGroup.get('username').hasError('required')">Required</mat-error>
+    <mat-error *ngIf="loginFormGroup.get('username').hasError('pattern')">Only lowercase, 3-12 characters</mat-error>
+  </mat-form-field>
+  <mat-form-field hideRequiredMarker>
+    <mat-label>Password</mat-label>
+    <input matInput
+           [formControlName]="'password'"
+           autocomplete="off"
+           type="password">
+    <mat-error *ngIf="loginFormGroup.get('password').hasError('required')">Required</mat-error>
+    <mat-error *ngIf="loginFormGroup.get('password').hasError('pattern')">At least 8 characters</mat-error>
+  </mat-form-field>
+  <div class="button-login">
+    <button mat-raised-button type="submit" color="primary" [disabled]="loginFormGroup.invalid">Login</button>
+  </div>
+</form>

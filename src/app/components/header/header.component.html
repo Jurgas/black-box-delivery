@@ -1,0 +1,27 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" [routerLink]="['/']">
+        <div class="logo-component">
+          <div class="logo-brand">
+            <img src="assets/favicon.png" class="logo" alt="Logo">
+            Black Box Delivery
+          </div>
+          <span id="creator">by Sebastian Jurga</span>
+        </div>
+      </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <a [routerLink]="['/sender/dashboard']">Dashboard</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <a [routerLink]="['/sender/logout']">Logout</a></li>
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <a [routerLink]="['/sender/login']">Login</a></li>
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <a [routerLink]="['/sender/register']">Register</a></li>
+    </ul>
+  </div>
+</nav>
