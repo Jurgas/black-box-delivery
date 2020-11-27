@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
       this.api.registerUser(data).subscribe(() => {
         this.router.navigate(['/sender/login']);
       }, error => {
-        this.openSnackBar(error.message);
+        this.openSnackBar(error.error.message);
       });
     }
 

@@ -1,5 +1,5 @@
 <header>Add new label</header>
-<form class="label-form" [formGroup]="labelFormGroup" (ngSubmit)="onSubmit()">
+<form class="label-form" [formGroup]="labelFormGroup" (ngSubmit)="onSubmit(formDirective)" #formDirective="ngForm" >
   <div class="form-content">
     <mat-form-field hideRequiredMarker>
       <mat-label>Receiver</mat-label>

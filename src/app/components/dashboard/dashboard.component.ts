@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {Label} from '../../domain/label/models/label';
 import {LabelService} from '../../services/label.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  onSubmit(formDirective: FormGroupDirective): void {
     if (this.labelFormGroup.valid) {
       const data: LabelData = {
         receiver: this.labelFormGroup.get('receiver').value,
@@ -62,12 +62,11 @@ export class DashboardComponent implements OnInit {
       this.labelService.createLabel(data).subscribe(() => {
         this.fetchLabels();
       }, error => {
-        this.openSnackBar(error.message);
+        console.log(error);
+        this.openSnackBar(error.error.message);
       });
       this.labelFormGroup.reset();
-      this.labelFormGroup.get('receiver').setErrors(null);
-      this.labelFormGroup.get('POBoxId').setErrors(null);
-      this.labelFormGroup.get('size').setErrors(null);
+      formDirective.resetForm();
     }
   }
 

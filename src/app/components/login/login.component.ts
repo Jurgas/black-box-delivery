@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       this.api.login(data).subscribe(() => {
         this.router.navigate(['/']);
       }, error => {
-        this.openSnackBar(error.message);
+        this.openSnackBar(error.error.message);
       });
     }
   }
