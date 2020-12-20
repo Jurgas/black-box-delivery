@@ -1,5 +1,5 @@
 <header>Add new label</header>
-<form class="label-form" [formGroup]="labelFormGroup" (ngSubmit)="onSubmit(formDirective)" #formDirective="ngForm" >
+<form class="label-form" [formGroup]="labelFormGroup" (ngSubmit)="onSubmit(formDirective)" #formDirective="ngForm">
   <div class="form-content">
     <mat-form-field hideRequiredMarker>
       <mat-label>Receiver</mat-label>
@@ -35,6 +35,7 @@
     <div class="receiver">Receiver</div>
     <div class="po-box-id">PO Box ID</div>
     <div class="size">Size</div>
+    <div class="sent">Sent</div>
     <div class="action">Delete</div>
   </div>
   <div class="list-content">
@@ -43,7 +44,12 @@
       <div class="receiver">{{label.receiver}}</div>
       <div class="po-box-id">{{label.POBoxId}}</div>
       <div class="size">{{label.size}}</div>
-      <div class="action"><mat-icon class="click" (click)="deleteLabel(label.labelId)">clear</mat-icon></div>
+      <div class="sent">{{label.sent === 'False' ? 'No' : 'Yes'}}</div>
+      <div class="action">
+        <div *ngIf="label.sent === 'False'">
+          <mat-icon class="click" (click)="deleteLabel(label.labelId)">clear</mat-icon>
+        </div>
+      </div>
     </div>
   </div>
 </div>

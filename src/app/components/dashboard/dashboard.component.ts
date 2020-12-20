@@ -29,18 +29,14 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.api.loggedIn().subscribe(() => {
-    }, () => {
-      this.router.navigate(['/sender/login']);
-    });
     this.fetchLabels();
   }
 
   fetchLabels(): void {
     this.labelService.getLabels().subscribe(res => {
-      this.labels = res.data;
+      this.labels = res._embedded.data;
     }, error => {
-      this.openSnackBar(error.message);
+      this.openSnackBar(error.error.message);
     });
   }
 
@@ -48,7 +44,7 @@ export class DashboardComponent implements OnInit {
     this.labelService.deleteLabel(labelId).subscribe( () => {
       this.fetchLabels();
     }, error => {
-      this.openSnackBar(error.message);
+      this.openSnackBar(error.error.message);
     });
   }
 

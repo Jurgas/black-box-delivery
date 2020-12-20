@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'bbd-header',
@@ -10,5 +11,10 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getToken(): boolean {
+    const idToken = AuthService.getToken();
+    return !!idToken;
   }
 }

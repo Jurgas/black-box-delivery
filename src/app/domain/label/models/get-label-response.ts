@@ -1,5 +1,7 @@
 import {Label} from './label';
 
 export interface GetLabelResponse {
-  data: [Label];
+  _embedded: {
+    data: [Label];
+  };
 }

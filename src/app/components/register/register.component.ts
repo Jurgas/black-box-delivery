@@ -5,6 +5,7 @@ import {User} from '../../domain/user/models/user';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Observable} from 'rxjs';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'bbd-register',
@@ -26,6 +27,7 @@ export class RegisterComponent implements OnInit {
   loginAvailable = false;
 
   constructor(private api: AuthService,
+              private userApi: UserService,
               private router: Router,
               private snackBar: MatSnackBar) {
   }
@@ -74,7 +76,7 @@ export class RegisterComponent implements OnInit {
 
   userTaken(control: FormControl): Promise<any> | Observable<any> {
     return new Promise<any>(resolve => {
-      this.api.checkUsername(control.value).subscribe(() => {
+      this.userApi.checkUsername(control.value).subscribe(() => {
         resolve(null);
       }, () => {
         resolve({userTaken: true});

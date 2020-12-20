@@ -4,41 +4,41 @@ import {Observable} from 'rxjs';
 import {User} from '../domain/user/models/user';
 import {environment} from '../../environments/environment';
 import {LoginRequest} from '../domain/user/models/login-request';
+import {map} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private static readonly token = 'access_token';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private router: Router) {
   }
 
-  checkUsername(username: string): Observable<{ message: string }> {
-    const url = environment.API_URL + '/sender/available';
-    const data = {
-      username
-    };
-    return this.http.post<any>(url, data);
+  static getToken(): string | null {
+    return localStorage.getItem(AuthService.token);
   }
 
   registerUser(data: User): Observable<{ message: string }> {
-    const url = environment.API_URL + '/sender/create';
-    return this.http.post<any>(url, data, {withCredentials: true});
+    const url = environment.API_URL + '/auth/register';
+    return this.http.post<any>(url, data);
   }
 
-  login(data: LoginRequest): Observable<{ message: string }> {
+  login(data: LoginRequest): Observable<void> {
     const url = environment.API_URL + '/auth/login';
-    return this.http.post<any>(url, data, {withCredentials: true});
+    return this.http.post<any>(url, data, {observe: 'response'}).pipe(
+      map(res => {
+        console.log(res);
+        console.log(res.headers.get('Authorization'));
+        localStorage.setItem(AuthService.token, res.headers.get('Authorization') as string);
+      })
+    );
   }
 
-  logout(): Observable<{ message: string }> {
-    const url = environment.API_URL + '/auth/logout';
-    const data = {};
-    return this.http.post<any>(url, data, {withCredentials: true});
-  }
-
-  loggedIn(): Observable<{ message: string }> {
-    const url = environment.API_URL + '/auth/logged';
-    return this.http.get<any>(url, {withCredentials: true});
+  logout(): void {
+    localStorage.removeItem(AuthService.token);
+    this.router.navigate(['/sender/login']);
   }
 }
