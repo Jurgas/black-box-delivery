@@ -37,6 +37,9 @@ export class DashboardComponent implements OnInit {
       this.labels = res._embedded.data;
     }, error => {
       this.openSnackBar(error.error.message);
+      if (error.status === 401) {
+        this.router.navigate(['/sender/login']);
+      }
     });
   }
 
@@ -45,6 +48,9 @@ export class DashboardComponent implements OnInit {
       this.fetchLabels();
     }, error => {
       this.openSnackBar(error.error.message);
+      if (error.status === 401) {
+        this.router.navigate(['/sender/login']);
+      }
     });
   }
 
@@ -58,8 +64,10 @@ export class DashboardComponent implements OnInit {
       this.labelService.createLabel(data).subscribe(() => {
         this.fetchLabels();
       }, error => {
-        console.log(error);
         this.openSnackBar(error.error.message);
+        if (error.status === 401) {
+          this.router.navigate(['/sender/login']);
+        }
       });
       this.labelFormGroup.reset();
       formDirective.resetForm();
