@@ -16,11 +16,15 @@
         <a [routerLink]="['/sender/dashboard']">Dashboard</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li *ngIf="getToken()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+      <li *ngIf="!getToken() && !(auth0.isAuthenticated$ | async)">
+        <a (click)="authLogin()">Login (Auth0)</a></li>
+      <li *ngIf="getToken() && auth0.isAuthenticated$ | async">
+        <a (click)="authLogout()">Logout (Auth0)</a></li>
+      <li *ngIf="getToken() && !(auth0.isAuthenticated$ | async)" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
         <a [routerLink]="['/sender/logout']">Logout</a></li>
-      <li *ngIf="!getToken()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+      <li *ngIf="!getToken() && !(auth0.isAuthenticated$ | async)" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
         <a [routerLink]="['/sender/login']">Login</a></li>
-      <li *ngIf="!getToken()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+      <li *ngIf="!getToken() && !(auth0.isAuthenticated$ | async)" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
         <a [routerLink]="['/sender/register']">Register</a></li>
     </ul>
   </div>

@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
+import {AuthService as Auth0Service} from '@auth0/auth0-angular';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {LoginRequest} from '../../domain/user/models/login-request';
+import {Auth0Request} from '../../domain/user/models/auth0-request';
 
 @Component({
   selector: 'bbd-login',
@@ -19,10 +21,27 @@ export class LoginComponent implements OnInit {
 
   constructor(private api: AuthService,
               private router: Router,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private auth: Auth0Service) {
   }
 
   ngOnInit(): void {
+    this.loginWithAuth0();
+  }
+
+  loginWithAuth0(): void {
+    this.auth.isAuthenticated$.subscribe(
+      () => {
+        this.auth.user$.subscribe( user => {
+          const data: Auth0Request = {
+            email: user.email,
+            sub: user.sub,
+          };
+          this.api.loginAuth0(data).subscribe( () => {
+            this.router.navigate(['/']);
+          });
+        });
+      });
   }
 
   onSubmit(): void {

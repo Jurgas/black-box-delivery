@@ -6,6 +6,7 @@ import {environment} from '../../environments/environment';
 import {LoginRequest} from '../domain/user/models/login-request';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {Auth0Request} from '../domain/user/models/auth0-request';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,6 @@ export class AuthService {
     const url = environment.API_URL + '/auth/login';
     return this.http.post<any>(url, data, {observe: 'response'}).pipe(
       map(res => {
-        console.log(res);
-        console.log(res.headers.get('Authorization'));
         localStorage.setItem(AuthService.token, res.headers.get('Authorization') as string);
       })
     );
@@ -40,5 +39,14 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem(AuthService.token);
     this.router.navigate(['/sender/login']);
+  }
+
+  loginAuth0(data: Auth0Request): Observable<void> {
+    const url = environment.API_URL + '/auth/auth0';
+    return this.http.post<any>(url, data, {observe: 'response'}).pipe(
+      map(res => {
+        localStorage.setItem(AuthService.token, res.headers.get('Authorization') as string);
+      })
+    );
   }
 }

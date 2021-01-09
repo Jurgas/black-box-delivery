@@ -14,6 +14,7 @@ import {LoginComponent} from './components/login/login.component';
 import {LogoutComponent} from './components/logout/logout.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {AuthInterceptor} from './services/auth-interceptor';
+import {AuthModule} from '@auth0/auth0-angular';
 
 
 @NgModule({
@@ -34,6 +35,11 @@ import {AuthInterceptor} from './services/auth-interceptor';
     BootstrapModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AuthModule.forRoot({
+      domain: 'jurgas.eu.auth0.com',
+      clientId: '0x8qCFDujSqavwEmoUbUXlyP8L6KTF1A',
+      redirectUri: 'http://localhost:5000/sender/login'
+    }),
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
