@@ -38,7 +38,7 @@ import {AuthModule} from '@auth0/auth0-angular';
     AuthModule.forRoot({
       domain: 'jurgas.eu.auth0.com',
       clientId: '0x8qCFDujSqavwEmoUbUXlyP8L6KTF1A',
-      redirectUri: 'http://localhost:5000/sender/login'
+      redirectUri: 'https://black-box-delivery.herokuapp.com/sender/login'
     }),
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
